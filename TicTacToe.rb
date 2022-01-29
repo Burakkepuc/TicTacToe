@@ -62,77 +62,66 @@ class Board
     puts '-------------'
   end
 
+
+    def occupied_error(value)
+        puts 'There is a value! Try Again'
+        print_board
+        value == @player1 ? player2(@player1) : player1(@player2) # Stay same player
+    end
+
   def move(place, value) # Place : 1-9, value = X || Y
     case place
     when 1
       if @board[0][0] == 'X' || @board[0][0] == 'O'
-        puts 'There is a value! Try Again'
-        print_board
-        value == @player1 ? player2(@player1) : player1(@player2)
+      occupied_error(value)
       else
         @board[0][0] = value
       end
     when 2
       if @board[0][1] == 'X' || @board[0][1] == 'O'
-        puts 'There is a value! Try Again'
-        print_board
-        value == @player1 ? player2(@player1) : player1(@player2)
+       occupied_error(value)
       else
         @board[0][1] = value
       end
     when 3
       if @board[0][2] == 'X' || @board[0][2] == 'O'
-        puts 'There is a value! Try Again'
-        print_board
-        value == @player1 ? player2(@player1) : player1(@player2)
+     occupied_error(value)
       else
         @board[0][2] = value
       end
     when 4
       if @board[1][0] == 'X' || @board[1][0] == 'O'
-        puts 'There is a value! Try Again'
-        print_board
-        value == @player1 ? player2(@player1) : player1(@player2)
+      occupied_error(value)
       else
         @board[1][0] = value
       end
     when 5
       if @board[1][1] == 'X' || @board[1][1] == 'O'
-        puts 'There is a value! Try Again'
-        print_board
-        value == @player1 ? player2(@player1) : player1(@player2)
+       occupied_error(value)
       else
         @board[1][1] = value
       end
     when 6
       if @board[1][2] == 'X' || @board[1][2] == 'O'
-        puts 'There is a value! Try Again'
-        print_board
-        value == @player1 ? player2(@player1) : player1(@player2)
+       occupied_error(value)
       else
         @board[1][2] = value
       end
     when 7
       if @board[2][0] == 'X' || @board[2][0] == 'O'
-        puts 'There is a value! Try Again'
-        print_board
-        value == @player1 ? player2(@player1) : player1(@player2)
+        occupied_error(value)
       else
         @board[2][0] = value
       end
     when 8
       if @board[2][1] == 'X' || @board[2][1] == 'O'
-        puts 'There is a value! Try Again'
-        print_board
-        value == @player1 ? player2(@player1) : player1(@player2)
+      occupied_error(value)
       else
         @board[2][1] = value
       end
     when 9
       if @board[2][2] == 'X' ||   @board[2][2] == 'O'
-        puts 'There is a value! Try Again'
-        print_board
-        value == @player1 ? player2(@player1) : player1(@player2)
+      occupied_error(value)
       else
         @board[2][2] = value
       end
