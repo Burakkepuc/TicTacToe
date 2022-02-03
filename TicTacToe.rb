@@ -67,62 +67,34 @@ class Board
     value == @player1 ? player2(@player1) : player1(@player2) # Stay same player
   end
 
-  def move(place, value) # Place : 1-9, value = X || Y
+  def assing_if_possible(x, y, value)
+    if @board[x][y] == 'X' || @board[x][y] == 'O'
+        occupied_error(value)
+    else
+        @board[x][y] = value
+    end
+  end
+
+  def move(place, value) # Place : 1-9, value = X || O
     case place
     when 1
-      if @board[0][0] == 'X' || @board[0][0] == 'O'
-        occupied_error(value)
-      else
-        @board[0][0] = value
-      end
+      assing_if_possible(0, 0, value)
     when 2
-      if @board[0][1] == 'X' || @board[0][1] == 'O'
-        occupied_error(value)
-      else
-        @board[0][1] = value
-      end
+      assing_if_possible(0, 1, value)
     when 3
-      if @board[0][2] == 'X' || @board[0][2] == 'O'
-        occupied_error(value)
-      else
-        @board[0][2] = value
-      end
+      assing_if_possible(0, 2, value)
     when 4
-      if @board[1][0] == 'X' || @board[1][0] == 'O'
-        occupied_error(value)
-      else
-        @board[1][0] = value
-      end
+      assing_if_possible(1, 0, value)
     when 5
-      if @board[1][1] == 'X' || @board[1][1] == 'O'
-        occupied_error(value)
-      else
-        @board[1][1] = value
-      end
+      assing_if_possible(1, 1, value)
     when 6
-      if @board[1][2] == 'X' || @board[1][2] == 'O'
-        occupied_error(value)
-      else
-        @board[1][2] = value
-      end
+      assing_if_possible(1, 2, value)
     when 7
-      if @board[2][0] == 'X' || @board[2][0] == 'O'
-        occupied_error(value)
-      else
-        @board[2][0] = value
-      end
+      assing_if_possible(2, 0, value)
     when 8
-      if @board[2][1] == 'X' || @board[2][1] == 'O'
-        occupied_error(value)
-      else
-        @board[2][1] = value
-      end
+      assing_if_possible(2, 1, value)
     when 9
-      if @board[2][2] == 'X' || @board[2][2] == 'O'
-        occupied_error(value)
-      else
-        @board[2][2] = value
-      end
+      assing_if_possible(2, 2, value)
     else
       puts 'It is not a valid value,please try again!(0..9)'
       occupied_error(value)
@@ -131,7 +103,7 @@ class Board
 
   def full?
     if @board.flatten.all?(String)
-      puts "Draw!"
+      puts 'Draw!'
       true
     end
   end
@@ -146,7 +118,7 @@ class Board
     end
     puts "Player 1 is: #{@player1}"
 
-    @player1 == "X" ? @player2 = "O" : @player2 = "X"
+    @player1 == 'X' ? @player2 = 'O' : @player2 = 'X'
     puts "Player 2 is: #{@player2}"
     print_board
   end
