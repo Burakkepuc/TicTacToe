@@ -61,43 +61,25 @@ class Board
     puts '-------------'
   end
 
+  def twodimentional_board
+    @board = @board.each_slice(3).map { |el| el }
+  end
+
   def occupied_error(value)
     puts 'There is a value or wrong place! Try Again!'
+    twodimentional_board
     print_board
     value == @player1 ? player2(@player1) : player1(@player2) # Stay same player
   end
 
-  def assing_if_possible(x, y, value)
-    if @board[x][y] == 'X' || @board[x][y] == 'O'
-        occupied_error(value)
-    else
-        @board[x][y] = value
-    end
-  end
-
-  def move(place, value) # Place : 1-9, value = X || O
-    case place
-    when 1
-      assing_if_possible(0, 0, value)
-    when 2
-      assing_if_possible(0, 1, value)
-    when 3
-      assing_if_possible(0, 2, value)
-    when 4
-      assing_if_possible(1, 0, value)
-    when 5
-      assing_if_possible(1, 1, value)
-    when 6
-      assing_if_possible(1, 2, value)
-    when 7
-      assing_if_possible(2, 0, value)
-    when 8
-      assing_if_possible(2, 1, value)
-    when 9
-      assing_if_possible(2, 2, value)
-    else
-      puts 'It is not a valid value,please try again!(0..9)'
+  def move_if_possible(place, value)
+    @board.flatten!
+    if @board[place - 1] == 'X' || @board[place - 1] == 'O' || !place.between?(1, 9)
       occupied_error(value)
+    else
+      @board[place - 1] = value
+      twodimentional_board
+      @board
     end
   end
 
@@ -126,14 +108,14 @@ class Board
   def player1(player1)
     puts "Choice #{player1} Place on a board(1 to 10)"
     @place = gets.chomp!.to_i
-    move(@place, player1)
+    move_if_possible(@place, player1)
     print_board
   end
 
   def player2(player2)
     puts "Choice #{player2} Place on a board(1 to 10)"
     @place = gets.chomp!.to_i
-    move(@place, player2)
+    move_if_possible(@place, player2)
     print_board
   end
 
@@ -141,10 +123,10 @@ class Board
     choosing_player
     loop do
       player1(@player1)
-      break if check_vertical(@player1, @player2) == true || check_diagonal(@player1, @player2) == true || check_horizontal(@player1, @player2) == true || full?
+      break if check_vertical(@player1,@player2) == true || check_diagonal(@player1,@player2) == true || check_horizontal(@player1,@player2) == true || full?
 
       player2(@player2)
-      break if check_vertical(@player1, @player2) == true || check_diagonal(@player1, @player2) == true || check_horizontal(@player1, @player2) == true || full?
+      break if check_vertical(@player1,@player2) == true || check_diagonal(@player1,@player2) == true || check_horizontal(@player1,@player2) == true || full?
     end
   end
 end
